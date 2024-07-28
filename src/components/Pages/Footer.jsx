@@ -8,7 +8,7 @@
 
 // src/components/Footer.jsx
 // import React from 'react';
-import bg from '../../assets/footer.jpeg'
+// import bg from '../../assets/footer.jpeg'
 import { Link } from 'react-router-dom';
 import { FaTwitter, FaFacebookF, FaPinterestP, FaInstagram, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import logo1 from '../../assets/logo1.png'
@@ -32,8 +32,8 @@ const Footer = () => {
         <div>
           <h3 className="text-green-400 text-xl font-bold">Explore</h3>
           <ul className="mt-4 space-y-2">
-            <li><Link to="/about" className="hover:underline">About</Link></li>
-            <li><Link to="/services" className="hover:underline">Services</Link></li>
+            <li><Link href="/about" className="hover:underline">About</Link></li>
+            <li><a href="/services" className="hover:underline">Services</a></li>
             <li><Link to="/projects" className="hover:underline">Our Projects</Link></li>
             <li><Link to="/farmers" className="hover:underline">Meet the Farmers</Link></li>
             <li><Link to="/news" className="hover:underline">Latest News</Link></li>
