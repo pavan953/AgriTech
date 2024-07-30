@@ -1,103 +1,135 @@
-
-// import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/logo1.png';
-import { FaTwitter, FaFacebookF, FaPinterestP, FaShoppingCart, FaInstagram, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaHome, FaInfoCircle, FaServicestack, FaNewspaper, FaStore, FaEnvelopeOpenText, FaMapMarkedAlt, FaUserTie, FaUserCircle } from 'react-icons/fa';
+import { FaShoppingCart, FaHome, FaInfoCircle, FaServicestack, FaNewspaper, FaStore, FaEnvelopeOpenText, FaMapMarkedAlt, FaUserTie, FaUserCircle, FaShieldAlt, FaChevronDown } from 'react-icons/fa';
+import AiAssistanceButton from './Aiassistance';
+import { useState, useEffect, useRef } from 'react';
 
-function Header() { 
+function Header() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const profileDropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+      if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target)) {
+        setProfileDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef, profileDropdownRef]);
+
   return (
-    <header className="bg-gray-100 border-b border-gray-300">
+    <header className="bg-beige border-b border-gray-300 top-0 sticky z-20">
       <div className="container mx-auto flex justify-between items-center py-4">
         <div className="flex items-center">
-          <NavLink to="/" className="w-36 font-bold text-green-600 ">
+          <NavLink to="/home" className="w-72 font-bold text-green-600">
             <img src={logo} alt="Logo" />
           </NavLink>
         </div>
-        <div className="flex gap-7 items-center space-x-4">
-          <a href="#" className="text-black hover:text-blue-800 transform
-              transition duration-500 hover:scale-150"><FaTwitter /></a>
-          <a href="#" className="text-black hover:text-blue-400 transform
-              transition duration-500 hover:scale-150"><FaFacebookF /></a>
-          <a href="#" className="text-black hover:text-red-600 transform
-              transition duration-500 hover:scale-150"><FaPinterestP /></a>
-          <a href="#" className="text-black hover:text-rose-500 transform
-              transition duration-500 hover:scale-150"><FaInstagram /></a>
-        </div>
         <div className="hidden md:flex items-center space-x-6">
-          <div className="flex items-center space-x-2 ">
-            <FaPhoneAlt className="text-green-600 transform
-              transition duration-500 hover:scale-150" />
-            <span><strong>+91 123456789</strong></span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <FaEnvelope className="text-green-600 transform
-              transition duration-500 hover:scale-150" />
-            <span><strong>AlTitans@gmail.com</strong></span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <FaMapMarkerAlt className="text-green-600 transform
-              transition duration-500 hover:scale-150" />
-            <span><strong>BITM Ballari, Karnataka</strong></span>
+          <nav className="bg-gray-50">
+            <div className="container mx-auto flex justify-between items-center py-2">
+              <ul className="flex space-x-4">
+                <li>
+                  <NavLink to="/Home" className={({ isActive }) => (isActive ? "font-bold text-green-600" : "hover:text-green-600")}>
+                    <FaHome className="inline-block mr-1" /> Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/about" className={({ isActive }) => (isActive ? "font-bold text-green-600" : "hover:text-green-600")}>
+                    <FaInfoCircle className="inline-block mr-1" /> About
+                  </NavLink>
+                </li>
+                <li className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="flex items-center space-x-1 hover:text-green-600"
+                  >
+                    <FaServicestack className="inline-block mr-1" /> Services <FaChevronDown />
+                  </button>
+                  {dropdownOpen && (
+                    <ul className="absolute left-0 mt-2 w-40 bg-white border border-gray-300 shadow-lg">
+                      <li>
+                        <NavLink to="/services" className="block px-4 py-2 hover:bg-green-100" onClick={() => setDropdownOpen(false)}>
+                          Services
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/shop" className="block px-4 py-2 hover:bg-green-100" onClick={() => setDropdownOpen(false)}>
+                          <FaStore className="inline-block mr-1" /> Shop
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/seller" className="block px-4 py-2 hover:bg-green-100" onClick={() => setDropdownOpen(false)}>
+                          <FaUserTie className="inline-block mr-1" /> Seller
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="https://cropinsurance.streamlit.app/" className="block px-4 py-2 hover:bg-green-100" onClick={() => setDropdownOpen(false)}>
+                          <FaShieldAlt className="inline-block mr-1" /> Insurance
+                        </NavLink>
+                      </li>
+                    </ul>
+                  )}
+                </li>
+                <li>
+                  <NavLink to="/news" className={({ isActive }) => (isActive ? "font-bold text-green-600" : "hover:text-green-600")}>
+                    <FaNewspaper className="inline-block mr-1" /> News
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/contact" className={({ isActive }) => (isActive ? "font-bold text-green-600" : "hover:text-green-600")}>
+                    <FaEnvelopeOpenText className="inline-block mr-1" /> Contact
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/maps" className={({ isActive }) => (isActive ? "font-bold text-green-600" : "hover:text-green-600")}>
+                    <FaMapMarkedAlt className="inline-block mr-1 " /> Maps
+                  </NavLink>
+                </li>
+              </ul>
+              <div className="flex items-center space-x-4">
+                <AiAssistanceButton />
+                <button className="relative hover:text-green-600">
+                  <FaShoppingCart />
+                  <span className="absolute -top-2 -right-3 bg-green-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                </button>
+              </div>
+            </div>
+          </nav>
+          <div className="relative" ref={profileDropdownRef}>
+            <button onClick={() => setProfileDropdownOpen(!profileDropdownOpen)} className="hover:text-green-600">
+              <FaUserCircle className="inline-block mr-1 text-4xl" />
+            </button>
+            {profileDropdownOpen && (
+              <ul className="absolute right-0 mt-2 w-40 bg-white rounded border-gray-300 shadow-lg">
+                <li>
+                  <NavLink to="/profile" className="block px-4 py-2 hover:bg-green-100" onClick={() => setProfileDropdownOpen(false)}>
+                    Profile
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/settings" className="block px-4 py-2 hover:bg-green-100" onClick={() => setProfileDropdownOpen(false)}>
+                    Settings
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/" className="block px-4 py-2 hover:bg-green-100" onClick={() => setProfileDropdownOpen(false)}>
+                    Logout
+                  </NavLink>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </div>
-      <nav className="bg-gray-50">
-        <div className="container mx-auto flex justify-between items-center py-2">
-          <ul className="flex space-x-4">
-            <li>
-              <NavLink to="/Home" className={({ isActive }) => (isActive ? "font-bold text-green-600" : "hover:text-green-600")}>
-                <FaHome className="inline-block mr-1" /> Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/about" className={({ isActive }) => (isActive ? "font-bold text-green-600" : "hover:text-green-600")}>
-                <FaInfoCircle className="inline-block mr-1" /> About
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/services" className={({ isActive }) => (isActive ? "font-bold text-green-600" : "hover:text-green-600")}>
-                <FaServicestack className="inline-block mr-1" /> Services
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/news" className={({ isActive }) => (isActive ? "font-bold text-green-600" : "hover:text-green-600")}>
-                <FaNewspaper className="inline-block mr-1" /> News
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/shop" className={({ isActive }) => (isActive ? "font-bold text-green-600" : "hover:text-green-600")}>
-                <FaStore className="inline-block mr-1" /> Shop
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/seller" className={({ isActive }) => (isActive ? "font-bold text-green-600" : "hover:text-green-600")}>
-                <FaUserTie className="inline-block mr-1" /> Seller
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/contact" className={({ isActive }) => (isActive ? "font-bold text-green-600" : "hover:text-green-600")}>
-                <FaEnvelopeOpenText className="inline-block mr-1" /> Contact
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/maps" className={({ isActive }) => (isActive ? "font-bold text-green-600" : "hover:text-green-600")}>
-                <FaMapMarkedAlt className="inline-block mr-1 " /> Maps
-              </NavLink>
-            </li>
-            
-          </ul>
-          <div className="flex items-center space-x-4">
-          <button className="hover:text-green-600">
-                  <FaUserCircle className="inline-block mr-1" /> Profile
-                </button>
-            {/* <button className="hover:text-green-600"><FaSearch /></button> */}
-            <button className="relative hover:text-green-600">
-              <FaShoppingCart />
-              <span className="absolute -top-2 -right-3 bg-green-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
-            </button>
-          </div>
-        </div>
-      </nav>
     </header>
   );
 }

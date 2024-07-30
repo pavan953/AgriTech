@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import bg from '../../assets/bg1.jpg'
+// import bg from '../../assets/bg1.jpg'
+import bgv from "../../assets/bgv.mp4"
 import Ai_agri from '../../assets/ai_agri.jpeg'
 import smt_organic from '../../assets/smt_organic.jpeg'
 import reforming from '../../assets/reforming.jpg'
@@ -17,23 +18,27 @@ import Organic from '../../assets/org.jpeg'
 // import Bgk from '../../assets/Bgk.jpeg'
 import AgriFarming from '../../assets/agri_Farm.jpeg'
 import Easy from '../../assets/easy.jpeg'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const Home = () => {
   return (
-    <div  className='bg-white'>
-      <section className="relative bg-cover bg-center h-screen" style={{ backgroundImage: `url(${bg})` }}>
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white">
-          <h1 className="text-5xl font-bold text-white"> WELCOME TO KISAN SEVAK </h1>
-          <p className="mt-4 text-3xl">Agriculture & Eco Farming</p>
-          <p className="mt-4 max-w-2xl">
-          Farmer is the most healthful, most useful and most noble employment of man
+    <div  className='bg-white w-full flex flex-col'>
+
+<section className="relative bg-cover bg-center h-[90vh] flex items-center justify-center">
+        <video src={bgv} autoPlay loop muted playsInline className='absolute inset-0 w-full h-full object-cover' />
+        <div className="relative z-70 flex flex-col items-center text-center text-white px-4">
+          <h1 className="text-5xl font-bold text-white hover:opacity-70 transition duration-500">WELCOME TO KISAN SEVAK</h1>
+          <p className="mt-4 text-3xl hover:opacity-70 transition duration-500">Agriculture & Eco Farming</p>
+          <p className="mt-4 max-w-2xl hover:opacity-70 transition duration-500">
+            Farmer is the most healthful, most useful and most noble employment of man
           </p>
           <button className="mt-8 px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600">
-           <Link to='/About'> Discover More</Link>
+            <Link to='/About'>Discover More</Link>
           </button>
         </div>
       </section>
-      <section className="py-12 bg-white">
+
+      <section className="py-12 bg-beige">
         <div className="container mx-auto text-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 bg-green-100 rounded-lg">
@@ -57,7 +62,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-beige">
         <div className="container mx-auto flex flex-col lg:flex-row items-center">
           <div className="lg:w-1/2 mb-8 lg:mb-0">
             <div className="relative">
@@ -98,7 +103,7 @@ const Home = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-beige">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold text-green-700">Our Services</h2>
           <h1 className="text-5xl font-bold mt-4">What We Offer</h1>
@@ -126,7 +131,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-beige">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold text-green-700">Recently Completed</h2>
           <h1 className="text-5xl font-bold mt-4">Explore Pojects</h1>
@@ -154,9 +159,9 @@ const Home = () => {
           </div>
         </div>
       </section>
-    <section className="py-16 bg-gray-100">
+    <section className="py-16 bg-beige">
       <div className="container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-8">What They're Talking About KISAN SEVAK</h2>
+        <h2 className="text-3xl font-bold text-center mb-8">What They&apos;re Talking About KISAN SEVAK</h2>
         <div className="flex flex-col md:flex-row justify-center items-center space-x-4">
           <div className="relative bg-green-100 p-4 shadow rounded">
             <img
@@ -164,10 +169,11 @@ const Home = () => {
               alt="Organic"
               className="absolute bottom-0 right-11 transform translate-x-1/2 translate-y-1/2 w-24 h-24 rounded-full border-4 border-white object-cover transition duration-500 hover:scale-110"
             />
-            <p>There are many variations of passages of available but the majortity have sufferred alteration in some form by injected humor or random word which don't look even.</p>
+            <p>There are many variations of passages of available but the majortity have sufferred alteration in some form by injected humor or random word which don&apos;t look even.</p>
             <p className="font-bold mt-2">Tuman</p>
             <p className='text-yellow-400'>★★★★★ </p>
           </div>
+          
           {/* Add more testimonial cards as needed */}
         <div className="flex flex-col md:flex-row justify-center items-center space-x-4">
           <div className="relative bg-green-100 p-4 shadow rounded ">
@@ -185,9 +191,9 @@ const Home = () => {
           </div>
       </div>
     </section>
-    <section className="container mx-auto py-8">
+    <section className="container mx-auto py-8 bg-beige">
     <div className="flex flex-col md:flex-row items-center md:items-start p-8">
-      <div className="md:w-1/2 p-4  bg-white">
+      <div className="md:w-1/2 p-4  bg-beige">
         <img src={AboutFramer} alt="Farmer" className="rounded-lg shadow-md transform transition duration-500 hover:scale-110" />
       </div>
       <div className="md:w-1/2 p-4">
@@ -209,7 +215,7 @@ const Home = () => {
       </div>
     </div>
     </section>
-    <section className="container mx-auto py-8 bg-gray-50">
+    <section className="container mx-auto py-16 bg-beige">
     <h5 className="text-xl font-bold text-center mb-8">From The Blog</h5>
       <h3 className="text-4xl font-bold text-center mb-8">News & Articles</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

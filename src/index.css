@@ -10,3 +10,14 @@ img {
   width: 80%;
   height: 80%;
 }
+@media (max-width: 768px) {
+  .profile-image {
+    width: 8vw; /* Adjust for smaller screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .profile-image {
+    width: 12vw; /* Adjust for larger screens */
+  }
+}
